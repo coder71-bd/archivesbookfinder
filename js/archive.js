@@ -2,33 +2,39 @@ const searchField = document.getElementById('search-field');
 const search = document.getElementById('search');
 const booksContainer = document.getElementById('books__container');
 
-const showBooks = (authors, imageId, firstPublished, bookTitle, publisher) => {
+const showBooks = (authors, imageId, firstPublished, title, publisher) => {
   const imgUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
   const div = document.createElement('div');
-  div.classList.add('card', 'mb-3');
-  div.style.maxWidth = '400px';
+  div.classList.add(
+    'card',
+    'mb-3',
+    'bg-dark',
+    'text-white',
+    'd-flex',
+    'flex-row',
+    'justify-content-center',
+    'align-items-center'
+  );
   div.innerHTML = `
-  <div class="row g-0">
-    <div class="col-md-4">
+    <div>
       <img
         src="https://covers.openlibrary.org/b/id/${imageId}-M.jpg"
         class="img-fluid rounded-start"
-        alt="book covers"
+        alt="cover of: ${title}"
       />
     </div>
-    <div class="col-md-8">
+    <div>
       <div class="card-body">
-        <h5 class="card-title">${bookTitle}</h5>
+        <h5 class="card-title">${title}</h5>
         <p class="card-text">first published in ${firstPublished}</p>
         <div class="card-text">
-          <p>authors: ${authors ? authors.join(', ') : 'not found'}</p>
+          <p>authors: ${authors ? authors[0] : 'not found'}</p>
         </div>
         <p class="card-text">publisher: ${
-          publisher ? publisher.join(', ') : 'not found'
+          publisher ? publisher[0] : 'not found'
         }</p>
       </div>
     </div>
-  </div>
   `;
   booksContainer.appendChild(div);
 };
@@ -40,10 +46,10 @@ const getBooksInfo = (books) => {
       author_name: authors,
       cover_i: imageId,
       first_publish_year: firstPublished,
-      text: [, , bookTitle],
+      title,
       publisher,
     } = book;
-    showBooks(authors, imageId, firstPublished, bookTitle, publisher);
+    showBooks(authors, imageId, firstPublished, title, publisher);
   });
 };
 /* *** load the books according to search results from the API and pass the result in showBooks function *** */
