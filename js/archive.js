@@ -1,11 +1,14 @@
+//variable from header
 const searchField = document.getElementById('search-field');
 const search = document.getElementById('search');
 const totalBooks = document.getElementById('total__books');
-const booksContainer = document.getElementById('books__container');
 
-const showBooks = (authors, imageId, firstPublished, title, publisher) => {
-  const imgUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
-  const section = document.createElement('section');
+//variable from main
+const booksContainer = document.getElementById('books__container');
+const errorContainer = document.getElementById('error__container');
+
+/* *** style the book section *** */
+const bookSectionStyling = (section) => {
   section.style.width = '400px';
   section.style.background = "url('images/section-bg.png')";
   section.classList.add(
@@ -13,11 +16,22 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
     'mb-3',
     'text-white',
     'd-flex',
-    'flex-md-row',
+    'flex-sm-row',
     'm-1',
     'justify-content-center',
     'align-items-center'
   );
+};
+
+/* *** show all the books in webpage *** */
+const showBooks = (authors, imageId, firstPublished, title, publisher) => {
+  const imgUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
+
+  //create a section for every book and add the necessary styles
+  const section = document.createElement('section');
+  bookSectionStyling(section);
+
+  //   every book UI with required info
   section.innerHTML = `
     <div>
       <img
@@ -38,12 +52,23 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
       </div>
     </div>
   `;
+
   booksContainer.appendChild(section);
 };
 
+/* *** get the necessary info from API *** */
 const getBooksInfo = (books) => {
-  console.log(books);
-  totalBooks.innerHTML = `<h3>We have found <strong>${books.numFound}</strong> simmilar books.</h3>`;
+  //show a message if no book found
+  if (books.docs.length === 0) {
+    totalBooks.innerHTML = 'try something else';
+    errorContainer.classList.remove('d-none');
+    return;
+  }
+
+  // show the total books info
+  totalBooks.innerText = `We have found ${books.docs.length} books.`;
+
+  // for every book get the necessary info from API and run the showBooks function
   books.docs.forEach((book) => {
     const {
       author_name: authors,
@@ -67,10 +92,26 @@ const loadBooks = (searchText) => {
 /* *** get the value from searchField and pass the vlaue into loadBooks function *** */
 const searchBooks = () => {
   const searchValue = searchField.value;
+
+  //show an error message if nothing specified in searchField
+  if (searchValue === '') {
+    totalBooks.innerHTML = 'please specify something to search!';
+    booksContainer.innerHTML = '';
+    errorContainer.classList.remove('d-none');
+    return;
+  }
+
+  // clear the prvious results from the webpage
+  errorContainer.classList.add('d-none');
   booksContainer.innerHTML = '';
   totalBooks.innerHTML = '';
+
+  //load books data from the API
   loadBooks(searchValue);
+
+  //clear search field after a search
   searchField.value = '';
 };
 
+/* *** event listener for search btn *** */
 search.addEventListener('click', searchBooks);
