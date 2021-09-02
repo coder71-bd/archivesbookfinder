@@ -14,9 +14,28 @@
     />
   </head>
   <body>
-    <header>
-      <input id="search-field" type="search" />
-      <button id="search">search books</button>
+    <header class="mt-3 pt-3">
+      <!-- <input id="search-field" type="search" />
+      <button id="search">search books</button> -->
+      <div
+        class="input-group my-3 pt-3 px-3"
+        style="max-width: 550px; margin: 0 auto"
+      >
+        <input
+          id="search-field"
+          type="search"
+          class="form-control"
+          placeholder="search by book name. e.g. 'Javascript'"
+        />
+        <button
+          id="search"
+          class="btn btn-dark text-white btn-outline-secondary"
+          type="button"
+        >
+          search books
+        </button>
+      </div>
+      <div id="total__books" class="text-center"></div>
     </header>
     <main>
       <div
@@ -24,7 +43,7 @@
         class="
           d-flex
           flex-wrap
-          justify-content-center justify-content-md-around
+          justify-content-center justify-content-sm-evenly
         "
       ></div>
     </main>

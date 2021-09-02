@@ -1,21 +1,23 @@
 const searchField = document.getElementById('search-field');
 const search = document.getElementById('search');
+const totalBooks = document.getElementById('total__books');
 const booksContainer = document.getElementById('books__container');
 
 const showBooks = (authors, imageId, firstPublished, title, publisher) => {
   const imgUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
-  const div = document.createElement('div');
-  div.classList.add(
+  const section = document.createElement('section');
+  section.classList.add(
     'card',
     'mb-3',
     'bg-dark',
     'text-white',
     'd-flex',
-    'flex-row',
+    'flex-md-row',
+    'm-1',
     'justify-content-center',
     'align-items-center'
   );
-  div.innerHTML = `
+  section.innerHTML = `
     <div>
       <img
         src="https://covers.openlibrary.org/b/id/${imageId}-M.jpg"
@@ -25,23 +27,24 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
     </div>
     <div>
       <div class="card-body">
-        <h5 class="card-title">${title}</h5>
+        <h3 class="card-title">${title}</h3>
+        <p class="card-text">by <strong>${
+          authors ? authors[0] : 'unknown author'
+        }</strong></p>
         <p class="card-text">first published in ${firstPublished}</p>
-        <div class="card-text">
-          <p>authors: ${authors ? authors[0] : 'not found'}</p>
-        </div>
         <p class="card-text">publisher: ${
-          publisher ? publisher[0] : 'not found'
+          publisher ? publisher[0] : 'unknown'
         }</p>
       </div>
     </div>
   `;
-  booksContainer.appendChild(div);
+  booksContainer.appendChild(section);
 };
 
 const getBooksInfo = (books) => {
-  const totalBooks = books.length;
-  books.forEach((book) => {
+  console.log(books);
+  totalBooks.innerHTML = `<h3>We have found <strong>${books.numFound}</strong> simmilar books.</h3>`;
+  books.docs.forEach((book) => {
     const {
       author_name: authors,
       cover_i: imageId,
@@ -52,18 +55,20 @@ const getBooksInfo = (books) => {
     showBooks(authors, imageId, firstPublished, title, publisher);
   });
 };
+
 /* *** load the books according to search results from the API and pass the result in showBooks function *** */
 const loadBooks = (searchText) => {
-  const url = `http://openlibrary.org/search.json?q=${searchText}`;
+  const url = `https://openlibrary.org/search.json?q=${searchText}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => getBooksInfo(data.docs));
+    .then((data) => getBooksInfo(data));
 };
 
 /* *** get the value from searchField and pass the vlaue into loadBooks function *** */
 const searchBooks = () => {
   const searchValue = searchField.value;
   booksContainer.innerHTML = '';
+  totalBooks.innerHTML = '';
   loadBooks(searchValue);
   searchField.value = '';
 };
