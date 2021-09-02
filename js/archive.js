@@ -46,7 +46,9 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
       <p class="card-text">by <strong>${
         authors ? authors[0] : 'unknown author'
       }</strong></p>
-      <p class="card-text">first published in <strong>${firstPublished}</strong></p>
+      <p class="card-text">first published <strong>${
+        firstPublished ? `in ${firstPublished}` : 'date not found'
+      }</strong></p>
       <p class="card-text">publisher: <strong>${
         publisher ? publisher[0] : 'unknown'
       }</strong></p>
