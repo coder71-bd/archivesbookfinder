@@ -6,10 +6,11 @@ const booksContainer = document.getElementById('books__container');
 const showBooks = (authors, imageId, firstPublished, title, publisher) => {
   const imgUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
   const section = document.createElement('section');
+  section.style.width = '400px';
+  section.style.background = "url('images/section-bg.png')";
   section.classList.add(
     'card',
     'mb-3',
-    'bg-dark',
     'text-white',
     'd-flex',
     'flex-md-row',
@@ -20,13 +21,12 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
   section.innerHTML = `
     <div>
       <img
-        src="https://covers.openlibrary.org/b/id/${imageId}-M.jpg"
+        src="${imgUrl}"
         class="img-fluid rounded-start"
         alt="cover of: ${title}"
       />
     </div>
-    <div>
-      <div class="card-body">
+    <div class="card-body col-md-8">
         <h3 class="card-title">${title}</h3>
         <p class="card-text">by <strong>${
           authors ? authors[0] : 'unknown author'
@@ -74,33 +74,3 @@ const searchBooks = () => {
 };
 
 search.addEventListener('click', searchBooks);
-
-// text ui
-/*
-<div class="card mb-3" style="max-width: 400px">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img
-              src="https://covers.openlibrary.org/b/id/554106-M.jpg"
-              class="img-fluid rounded-start"
-              alt="book covers"
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Javascript</h5>
-              <p class="card-text">published in 2000</p>
-              <div class="card-text">
-                <p>authors:</p>
-                <ul>
-                  <li>author-1</li>
-                  <li>author-2</li>
-                  <li>author-3</li>
-                </ul>
-              </div>
-              <p class="card-text">publisher</p>
-            </div>
-          </div>
-        </div>
-      </div>
-*/
