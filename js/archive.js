@@ -1,15 +1,16 @@
-//variable from header
+/* *** VARIABLE FROM HEADER *** */
 const searchField = document.getElementById('search-field');
 const search = document.getElementById('search');
 const totalBooks = document.getElementById('total__books');
 
-//variable from main
+/* *** VARIABLE FORM MAIN *** */
 const booksContainer = document.getElementById('books__container');
 const errorContainer = document.getElementById('error__container');
+const loaderContainer = document.getElementById('loader__container');
 
-/* *** style the book section *** */
+/* *** STYLE THE BOOK SECTION *** */
 const bookSectionStyling = (section) => {
-  section.style.width = '400px';
+  section.style.width = '25rem';
   section.style.background = "url('images/section-bg.png')";
   section.classList.add(
     'card',
@@ -23,7 +24,7 @@ const bookSectionStyling = (section) => {
   );
 };
 
-/* *** show all the books in webpage *** */
+/* *** SHOW ALL THE BOOKS IN WEBPAGE *** */
 const showBooks = (authors, imageId, firstPublished, title, publisher) => {
   const imgUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
 
@@ -31,7 +32,7 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
   const section = document.createElement('section');
   bookSectionStyling(section);
 
-  //   every book UI with required info
+  //   update every book UI with required info
   section.innerHTML = `
     <div>
       <img
@@ -41,26 +42,25 @@ const showBooks = (authors, imageId, firstPublished, title, publisher) => {
       />
     </div>
     <div class="card-body col-md-8">
-        <h3 class="card-title">${title}</h3>
-        <p class="card-text">by <strong>${
-          authors ? authors[0] : 'unknown author'
-        }</strong></p>
-        <p class="card-text">first published in ${firstPublished}</p>
-        <p class="card-text">publisher: ${
-          publisher ? publisher[0] : 'unknown'
-        }</p>
-      </div>
+      <h3 class="card-title">${title}</h3>
+      <p class="card-text">by <strong>${
+        authors ? authors[0] : 'unknown author'
+      }</strong></p>
+      <p class="card-text">first published in <strong>${firstPublished}</strong></p>
+      <p class="card-text">publisher: <strong>${
+        publisher ? publisher[0] : 'unknown'
+      }</strong></p>
     </div>
   `;
 
   booksContainer.appendChild(section);
 };
 
-/* *** get the necessary info from API *** */
+/* *** GET THE NECESSARY INFO FROM API *** */
 const getBooksInfo = (books) => {
   //show a message if no book found
   if (books.docs.length === 0) {
-    totalBooks.innerHTML = 'try something else';
+    totalBooks.innerHTML = 'whoops! nothing found. Try something else :-(';
     errorContainer.classList.remove('d-none');
     return;
   }
@@ -81,15 +81,22 @@ const getBooksInfo = (books) => {
   });
 };
 
-/* *** load the books according to search results from the API and pass the result in showBooks function *** */
+/* *** LOAD THE BOOKS FROM THE API AND PASS THE RESULT IN GETBOOKSINFO FUNCTION *** */
 const loadBooks = (searchText) => {
   const url = `https://openlibrary.org/search.json?q=${searchText}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => getBooksInfo(data));
+    .then((data) => {
+      // remove the loader
+      loaderContainer.classList.add('d-none');
+      loaderContainer.classList.remove('d-flex');
+
+      // pass data into getbooksinfo info function
+      getBooksInfo(data);
+    });
 };
 
-/* *** get the value from searchField and pass the vlaue into loadBooks function *** */
+/* *** GET THE VALUE FROM SEARCHFIELD AND PASS THE VALUE INTO LOADBOOKS FUNCTION *** */
 const searchBooks = () => {
   const searchValue = searchField.value;
 
@@ -97,7 +104,10 @@ const searchBooks = () => {
   if (searchValue === '') {
     totalBooks.innerHTML = 'please specify something to search!';
     booksContainer.innerHTML = '';
+
+    // show the loader
     errorContainer.classList.remove('d-none');
+    loaderContainer.classList.add('d-flex');
     return;
   }
 
@@ -106,6 +116,10 @@ const searchBooks = () => {
   booksContainer.innerHTML = '';
   totalBooks.innerHTML = '';
 
+  // show the loader
+  loaderContainer.classList.remove('d-none');
+  loaderContainer.classList.add('d-flex');
+
   //load books data from the API
   loadBooks(searchValue);
 
@@ -113,5 +127,5 @@ const searchBooks = () => {
   searchField.value = '';
 };
 
-/* *** event listener for search btn *** */
+/* *** EVENT LISTENER FOR SEARCH BTN *** */
 search.addEventListener('click', searchBooks);

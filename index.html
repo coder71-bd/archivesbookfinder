@@ -4,10 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <title>book archive</title>
+
+    <!-- fav icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
     <!-- css link -->
     <link rel="stylesheet" href="css/style.css" />
+
     <!-- bootstrap css link -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
@@ -15,6 +19,7 @@
       integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
       crossorigin="anonymous"
     />
+
     <!-- font awesome icon -->
     <script
       src="https://kit.fontawesome.com/4ab6c0d280.js"
@@ -22,15 +27,15 @@
     ></script>
   </head>
   <body>
+    <!-- ******************** 
+            HEADER
+    ******************** -->
     <header class="mt-3 pt-3">
       <!-- heading text -->
       <h1 class="text-center text-primary">Search Your Favourite Books!!!</h1>
 
-      <!-- search field and button -->
-      <section
-        class="input-group my-3 pt-3 px-3"
-        style="max-width: 550px; margin: 0 auto"
-      >
+      <!-- search container -->
+      <section id="search__container" class="input-group my-3 pt-3 px-3">
         <!-- search field -->
         <input
           id="search-field"
@@ -53,8 +58,13 @@
       <h2 id="total__books" class="text-center"></h2>
     </header>
 
+    <!-- ******************** 
+            MAIN      
+    ******************** -->
     <main class="mt-3">
-      <!-- book container -->
+      <!-- ************* 
+        BOOKS CONTAINER
+      ************* -->
       <div
         id="books__container"
         class="
@@ -64,21 +74,10 @@
         "
       ></div>
 
-      <!-- error container -->
-      <section id="error__container" class="d-none">
-        <!-- error -->
-        <div id="error">
-          <!-- bug icon -->
-          <i id="bug" class="fas fa-bug"></i>
-
-          <!-- error text -->
-          <h3 class="error__text">
-            <strong class="text-warning">404</strong>
-            <span class="text-white">not</span>
-            <span class="text-white">found</span>
-          </h3>
-        </div>
-
+      <!-- ************* 
+        ERROR CONTAINER
+      ************* -->
+      <section id="error__container" class="d-none row">
         <!-- moving circles -->
         <ul class="circles">
           <li></li>
@@ -92,6 +91,211 @@
           <li></li>
           <li></li>
         </ul>
+
+        <!-- error -->
+        <div id="error">
+          <!-- bug icon -->
+          <i id="bug" class="fas fa-bug"></i>
+
+          <!-- error text -->
+          <h3 class="error__text">
+            <strong class="text-warning">404</strong>
+            <span class="text-white">not</span>
+            <span class="text-white">found</span>
+          </h3>
+        </div>
+      </section>
+
+      <!-- ************* 
+        LOADER CONTAINER
+      ************* -->
+      <section
+        id="loader__container"
+        class="
+          d-none
+          flex-wrap
+          justify-content-center justify-content-sm-evenly
+        "
+      >
+        <!-- loader (1) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (2) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (3) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (4) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (5) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (6) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (7) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (8) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
+
+        <!-- loader (9) -->
+        <div
+          class="
+            loader
+            p-2
+            d-flex
+            flex-column flex-sm-row
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="loader__animate loader__cover"></div>
+          <div>
+            <div class="loader__animate loader__title"></div>
+            <div class="loader__animate loader__author"></div>
+            <div class="loader__animate loader__year"></div>
+            <div class="loader__animate loader__publisher"></div>
+          </div>
+        </div>
       </section>
     </main>
 
